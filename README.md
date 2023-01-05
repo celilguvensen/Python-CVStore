@@ -1,0 +1,2 @@
+In summary, In this example, user Personal and CV information can be added and viewed. In addition, with Github API, users' Github information is taken in JSON format and displayed on the html page.
+When a new user registers and the user's CV information is displayed, a notification mail is sent with the Django send_mail function.

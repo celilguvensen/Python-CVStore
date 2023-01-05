@@ -1,0 +1,93 @@
+ {% extends "layout.html" %}
+
+{% block body %}
+{% if user.is_authenticated %}
+
+
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+            <h3 style="font-family: Cursive, Copperplate,sans-serif;">Özgeçmişler</h3>
+            <hr>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+            <form>  
+            {% csrf_token %}
+                <input type="text" name= "keyword" class="input-sm" maxlength="64" placeholder="Pozisyon Ara..."> 
+                <button type="submit" class="btn btn-danger">Ara</button> 
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+{% if resumes %}
+    {% for resume in resumes  %}
+
+        {% if profiles %}
+
+            {% for profile in profiles %}
+ 
+                {% if  profile.author_id  == resume.author_id %}
+
+                    <div class="row" >
+                        <div class="col-md-9 offset-md-3">
+                            <div class="col-lg-8" style="border-style:groove;background-color:#AEB6BF;">
+     
+                         
+                                <a style="color:red" href="{%url 'detail' resume.id%}"><h2 class="mt-4">{{resume.position}}</h2></a>
+    
+                                    {% if resume.personal_image %}
+                                        <a href="{%url 'detail' resume.id%}"><img class="img-fluid rounded" src="{{resume.personal_image.url}}" alt="" width="200" height="200"></a>
+                                    {% else %}
+                                        <img class="img-fluid rounded" src="/media/none.png" alt="" alt="" width="200" height="200">
+                                        <p style="color:red;">Kişi görseli mevcut değil</p>
+                                    {% endif %}   
+                                    
+                                    <div style="font-family: Cursive, Copperplate,sans-serif;color:red;font-weight:bolder "><u> Ad ve Soyad:</u> <strong style="color:black">{{resume.author.first_name}} {{resume.author.last_name}}</strong></div>
+                                    <div style="font-family: Cursive, Copperplate,sans-serif;color:red;font-weight:bolder "><u> Sektör:</u> <strong style="color:black">{{resume.sector}}</strong></div>
+                                         
+                                    {% if resume.personal_cv %}
+                                       <div> <embed src="{{resume.personal_cv.url}}" type="application/pdf" width="500" height="500"></embed> </div>
+                                    {% else %}
+                                        <p style="color:red;">CV mevcut değil...</p>
+                      
+                                    {% endif %}
+
+                         </div>
+                       </div>
+                    </div>
+                    <br>
+
+ 
+                {% endif %}      
+            {% endfor %}
+    
+                    
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <div class="row">
+        <div class="col-md-10 offset-md-3">
+            <div class="col-lg-8">
+                <div class="alert alert-danger">
+                    CV Mevcut Değil...
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+
+{% else %}
+
+        <div class="alert alert-danger">
+            CV'leri Görüntüleyebilmeniz için Giriş Yapmalısınız... 
+        </div>
+
+{% endif %}
+{% endblock body %}

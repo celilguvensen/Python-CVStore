@@ -1,0 +1,103 @@
+
+ 
+<header>
+    <div class="navbar navbar-expand-sm bg-dark navbar-primary ">
+        <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/media/logo.png" width="30" height="30" alt="logo">
+                    CV Store Home
+                </a>
+                <li class='nav-item dropdown'
+                
+                >   
+                    <a class="navbar-brand" href="{%url 'github'%}">
+                    <img src="/media/github.png" width="30" height="30" alt="logo">
+                    Github
+                    </a>
+                </li>
+ 
+
+                 
+                <ul class="navbar-nav mr-auto">
+
+                    <li class='nav-item active'
+
+                    >
+                        <a href="{% url 'index'%}" class="nav-link">About</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class='nav-item active'
+
+                    >
+                        <a href="{% url 'mycv'%}" class="nav-link">My CV's</a>
+                    </li> 
+                     
+                    {% endif %}
+    
+
+                    <li class='nav-item active'
+
+                    >
+                        <a href="{% url 'cvss'%}" class="nav-link">CVs</a>
+                    </li>
+
+                </ul>
+
+                {% if request.user.is_authenticated %}
+  
+                    <ul class="navbar-nav ml-auto ">
+                        <li class="menu-item publish-button" id="publishButton">
+                        
+                            <a href="{% url 'logout' %}">Logout</a>
+                    
+                        </li>
+                        <li class='nav-item active'
+                        >
+                                <a href="{% url 'update' %}" class="nav-link">Update</a>
+                        </li> 
+
+                        <li class="nav-item active">
+                            <a class="nav-link" style="color:red" href="{% url 'index' %}"><span>Hoşgeldiniz {{user.first_name}}</a>
+                        </li>  
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"  width="30" height="30"  class="rounded-circle">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{% url 'mycv'%}" >MyCV</a>
+                            <a class="dropdown-item" href="{% url 'update'%}">Edit Profile</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                            </div>
+                        </li>   
+
+                    </ul>
+
+
+                {% else %}
+                    <ul class="navbar-nav ml-auto">
+                        <li class="menu-item publish-button" id="publishButton">
+                        
+                            <a href="{% url 'login' %}">Login</a>
+                    
+                        </li>
+                        <li class="menu-item publish-button" id="publishButton">
+                        
+                            <a href="{% url 'register' %}">Register</a>
+                    
+                        </li>
+
+                    </ul>
+
+
+                {% endif %}
+
+
+                
+
+
+
+        </div>
+            <div><ul class="navbar-nav ml-auto" style="color:red">{{current}}, {{day}}</ul></div>
+    </div>
+    
+</header>

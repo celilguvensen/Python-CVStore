@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h3>Özgeçmişiniz </h3>
+    <hr>
+    <form method = "post" enctype="multipart/form-data"> 
+    {{form.media}}  
+    <br>
+    <button type="submit" class ="btn btn-success">Güncelle</button>
+    <td><a href="/" class ="btn btn-info">Vazgeç</a></td>
+    <td><a href="{% url 'delete'%}" class ="btn btn-danger">Sil</a></td>
+</form>
+  
+  </div>
+</div>
+
+
+{% endblock body %}
